@@ -5,7 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddScoped<ISongService, SongService>();
+builder.Services.AddSingleton<ISongService, SongService>(); //Should be Singleton, instead of Scoped
+builder.Services.AddScoped<GetSongsByName>(); //New
+builder.Services.AddScoped<GetSongsByArtist>(); //New
 
 
 builder.Services.AddControllers();
