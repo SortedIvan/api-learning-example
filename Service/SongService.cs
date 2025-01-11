@@ -3,8 +3,11 @@
 namespace api_learning_project.Service
 {
     public class SongService : ISongService
-    {
+
+
+        private List<int> likedSongIds;
         private List<Song> songs;
+        
         private int idCounter = 0;
 
         public SongService()
@@ -12,7 +15,20 @@ namespace api_learning_project.Service
             songs = new List<Song>();
         }
 
-        public bool CreateSong(string genre, string title, int lengthInSeconds, string artist)
+        public Song GetSongById(int songId)
+        {
+            for (int i = 0; i < songs.Count; ++i)
+            {
+                if (songs[i].Id == songId)
+                {
+                    return songs[i];
+                }
+            }
+
+            return null;
+        }
+
+        public bool AddSongToSystem(string genre, string title, int lengthInSeconds, string artist)
         {
             if (String.IsNullOrEmpty(genre) || String.IsNullOrEmpty(title) || String.IsNullOrEmpty(artist))
             {

@@ -9,14 +9,10 @@ namespace api_learning_project.Controllers
     public class SongController : ControllerBase
     {
         private readonly ISongService songService;
-        private readonly GetSongsByName getSongsByName; //New
-        private readonly GetSongsByArtist getSongsByArtist; //New
 
-        public SongController(ISongService songService, GetSongsByName getSongsByName, GetSongsByArtist getSongsByArtist)
+        public SongController(ISongService songService)
         {
             this.songService = songService;
-            this.getSongsByName = getSongsByName; //New
-            this.getSongsByArtist = getSongsByArtist; // New
         }
 
         [HttpPost("createsong")]
@@ -46,7 +42,7 @@ namespace api_learning_project.Controllers
         [HttpGet("getsongsbyname")] //New
         public IActionResult GetSongsByName(string name)
         {
-            List<Song> songs = getSongsByName.FindSongsByName(name);
+            List<Song> songs = songService.FindSongsByName(name);
             if (!songs.Any())
             {
                 return NotFound("No matching songs found");
@@ -57,7 +53,7 @@ namespace api_learning_project.Controllers
         [HttpGet("getsongsbyartist")] //New
         public IActionResult GetSongsByArtist(string artist)
         {
-            List<Song> songs = getSongsByArtist.FindSongsByArtist(artist);
+            List<Song> songs = songService.FindSongsByArtist(artist);
             if (!songs.Any())
             {
                 return NotFound("No matching songs found");
