@@ -3,7 +3,7 @@
 namespace api_learning_project.Service
 {
     public class SongService : ISongService
-
+    { 
 
         private List<int> likedSongIds;
         private List<Song> songs;
@@ -45,17 +45,17 @@ namespace api_learning_project.Service
             return true;
         }
 
-        public List<Song> GetAllSongs() //New
+        public List<Song> GetAllSongs() 
         {
             return songs;
         }
 
-        public List<Song> FindSongsByName(string name) //New
+        public List<Song> FindSongsByName(string name) 
         {
             return songs.Where(s => s.Title.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
         }
 
-        public List<Song> FindSongsByArtist(string artist) //New
+        public List<Song> FindSongsByArtist(string artist) 
         {
             return songs.Where(s => s.Artist.Contains(artist, StringComparison.OrdinalIgnoreCase)).ToList() ;
         }

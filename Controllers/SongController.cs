@@ -18,7 +18,7 @@ namespace api_learning_project.Controllers
         [HttpPost("createsong")]
         public IActionResult CreateSong(string genre, string title, int lengthInSeconds, string artist)
         {
-            bool result = songService.CreateSong(genre, title, lengthInSeconds, artist);
+            bool result = songService.AddSongToSystem(genre, title, lengthInSeconds, artist);
 
             if (result)
             {
@@ -28,7 +28,7 @@ namespace api_learning_project.Controllers
             return BadRequest("Something went wrong. Please try again");
         }
 
-        [HttpGet("getsongs")] //New
+        [HttpGet("getsongs")] 
         public IActionResult GetSongs()
         {
             List<Song> songs = songService.GetAllSongs();
@@ -39,7 +39,7 @@ namespace api_learning_project.Controllers
             return Ok(songs);
         }
 
-        [HttpGet("getsongsbyname")] //New
+        [HttpGet("getsongsbyname")] 
         public IActionResult GetSongsByName(string name)
         {
             List<Song> songs = songService.FindSongsByName(name);
@@ -50,7 +50,7 @@ namespace api_learning_project.Controllers
             return Ok(songs);
         }
 
-        [HttpGet("getsongsbyartist")] //New
+        [HttpGet("getsongsbyartist")] 
         public IActionResult GetSongsByArtist(string artist)
         {
             List<Song> songs = songService.FindSongsByArtist(artist);
