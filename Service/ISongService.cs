@@ -8,5 +8,6 @@ namespace api_learning_project.Service
         public List<Song> GetAllSongs(); 
         public List<Song> FindSongsByName(string name);
         public List<Song> FindSongsByArtist(string artist);
+        public Song GetSongById(int songId);
     }
 }

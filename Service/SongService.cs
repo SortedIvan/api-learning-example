@@ -4,15 +4,14 @@ namespace api_learning_project.Service
 {
     public class SongService : ISongService
     { 
-
         private List<int> likedSongIds;
         private List<Song> songs;
-        
         private int idCounter = 0;
 
         public SongService()
         {
             songs = new List<Song>();
+            likedSongIds = new List<int>();
         }
 
         public Song GetSongById(int songId)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using api_learning_project.Model;
 
@@ -6,24 +7,24 @@ namespace api_learning_project.Service
 {
     public class UserService : IUserService
     {
-        private List<User> users;
+        private static List<User> users = new List<User>();
         private int idCounter = 0;
-
-        public UserService()
-        {
-            users = new List<User>();
-        }
 
         public bool CreateAccount(string username, string password, string email)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(email))
             {
-                return false; 
+                return false;  
             }
 
             if (users.Exists(u => u.Username.Equals(username, StringComparison.OrdinalIgnoreCase)))
             {
-                return false;  
+                return false;
+            }
+
+            if (users.Exists(u => u.Email.Equals(email, StringComparison.OrdinalIgnoreCase)))
+            {
+                return false;
             }
 
             User newUser = new User(idCounter++, username, password, email);
@@ -31,9 +32,15 @@ namespace api_learning_project.Service
 
             return true; 
         }
-        public List<User> GetAllUsers()
+
+        public bool CheckUsernameExists(string username)
         {
-            return users;
+            return users.Exists(u => u.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public bool CheckEmailExists(string email)
+        {
+            return users.Exists(u => u.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

@@ -8,8 +8,6 @@ namespace api_learning_project.Controllers
     {
         private readonly IUserService userService;
 
-        private readonly UserService createAccountService;
-
         public AccountController(IUserService userService)
         {
             this.userService = userService;
@@ -23,6 +21,21 @@ namespace api_learning_project.Controllers
             if (result)
             {
                 return Ok("Account successfully created");
+            }
+
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(email))
+            {
+                return BadRequest("All fields are required");
+            }
+
+            if (userService.CheckUsernameExists(username))
+            {
+                return BadRequest("Username is taken");                                                                        
+            }
+
+            if (userService.CheckEmailExists(email))
+            {
+                return BadRequest("Email is taken");
             }
 
             return BadRequest("Failed to create account. Please check your input or try again.");
