@@ -60,5 +60,18 @@ namespace api_learning_project.Controllers
             }
             return Ok(songs);
         }
+
+        [HttpPost("likesong/likesong")]
+        public IActionResult LikeSongById([FromRoute] int songId) 
+        {
+            bool result = songService.LikeSongById(songId);
+
+            if (result)
+            {
+                return Ok($"Song with ID {songId} has been liked.");
+            }
+
+            return BadRequest($"Unable to like song with ID {songId}. It may not exist or is already liked.");
+        }
     }
 }

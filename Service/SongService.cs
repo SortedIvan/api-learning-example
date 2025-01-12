@@ -27,6 +27,19 @@ namespace api_learning_project.Service
             return null;
         }
 
+        public bool LikeSongById(int songId)
+        {
+            if (songs.Any(s => s.Id == songId))
+            {
+                if (!likedSongIds.Contains(songId))
+                {
+                    likedSongIds.Add(songId);
+                    return true; 
+                }
+            }
+            return false;
+        }
+
         public bool AddSongToSystem(string genre, string title, int lengthInSeconds, string artist)
         {
             if (String.IsNullOrEmpty(genre) || String.IsNullOrEmpty(title) || String.IsNullOrEmpty(artist))
